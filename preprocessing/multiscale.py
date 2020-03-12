@@ -87,11 +87,10 @@ class Multiscale():
             # prepare case insensitive glob pattern,
             # e.g. for '.pdf', this will produce '*.[Pp][Dd][Ff]'
             if (self._file_extension.count('.') != 1):
-                raise (RuntimeError, 'Invalid file extension')
+                raise RuntimeError('Invalid file extension')
 
-            glob_pattern = '*' + ''.join(sum(map(lambda x: ['[%s%s]' % (a.upper(), a.lower())
-                                                              if a.isalpha() else a for a in list(x)],
-                                                 self._file_extension), []))
+            glob_pattern = '*' + ''.join(sum([['[%s%s]' % (a.upper(), a.lower()) 
+                                         if a.isalpha() else a for a in list(x)] for x in self._file_extension], []))
 
             files = glob.glob(os.path.join(self._input, glob_pattern))
         elif(os.path.isfile(self._input)):
@@ -100,7 +99,7 @@ class Multiscale():
                 files = fh.read().splitlines()
                 fh.close()
             except:
-                raise(RuntimeError, 'Failed to read input file')
+                raise RuntimeError('Failed to read input file')
         log.info(' Found %d files to process ' % len(files))
         return files
     # end func
@@ -236,8 +235,8 @@ class Multiscale():
                 r = r[:, psy:-pey]
 
             if(r.shape != od.shape):
-                print r.shape, od.shape
-                raise(RuntimeError, 'Error encountered in wavelet reconstruction.')
+                print ([r.shape, od.shape])
+                raise RuntimeError('Error encountered in wavelet reconstruction.')
 
             fn,ext = os.path.splitext(os.path.basename(fname))
             ofn = os.path.join(self._output_folder, '%s.level_%03d%s'%(fn,l,ext))
