@@ -1,6 +1,27 @@
 # geo-wavelets
 2D Wavelet decomposition/reconstruction for raster data
 
+## Running on Gadi:
+
+Load modules and define paths as follows:
+
+```
+module purge
+module load python3/3.7.4
+module load gdal/3.0.2
+module load openmpi/2.1.6-mt
+module load hdf5/1.10.5p
+export GDAL_DATA=/apps/gdal/3.0.2/share/gdal/
+export PYTHONPATH=/apps/gdal/3.0.2/lib64:/apps/gdal/3.0.2/lib64/python3.7/site-packages
+export PATH=$HOME/.local/bin:$PATH
+export PYTHONPATH=/g/data/ge3/rakib/raijin/soft/geo-wavelets:$PYTHONPATH
+export LC_ALL=en_AU.UTF-8
+export LANG=en_AU.UTF-8
+```
+## User Parameters 
+
+`multiscale.py` takes the following input parameters:
+
 ```
 Usage: multiscale.py [OPTIONS] INPUT OUTPUT_FOLDER MAX_LEVEL
 
