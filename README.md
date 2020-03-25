@@ -80,7 +80,8 @@ Options:
                                   regions of NO_DATA_VALUE, 'ringing'
                                   artefacts can be pushed further outward,
                                   away from the region of interest in the
-                                  original image. This parameter has no effect
+                                  original image. Raster data are extrapolated
+                                  by default and this parameter has no effect
                                   when the input raster has no masked regions
 
   --max-search-dist INTEGER       Maximum search distance (in pixels) for
@@ -102,4 +103,5 @@ Options:
 
   --log-level [DEBUG|INFO|WARN]   Logging verbosity
   -h, --help                      Show this message and exit.
+
 ```
