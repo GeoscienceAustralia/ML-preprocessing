@@ -1,9 +1,14 @@
 # geo-wavelets
 2D Wavelet decomposition/reconstruction for raster data
 
+## Dependencies:
+
+There are no major additional dependencies other than the ones defined below, which are already available on
+Gadi.
+
 ## Running on Gadi:
 
-Load modules and define paths as follows:
+Load modules and define paths (amend as required) as follows for interactive runs:
 
 ```
 module purge
@@ -18,6 +23,9 @@ export PYTHONPATH=/g/data/ge3/rakib/raijin/soft/geo-wavelets:$PYTHONPATH
 export LC_ALL=en_AU.UTF-8
 export LANG=en_AU.UTF-8
 ```
+
+For `pbs` batch jobs, check example pbs scripts in the `preprocessing/pbs` folder in this repository.
+
 ## User Parameters 
 
 `multiscale.py` takes the following input parameters:
