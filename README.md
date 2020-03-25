@@ -26,6 +26,14 @@ export LANG=en_AU.UTF-8
 
 For `pbs` batch jobs, check example pbs scripts in the `preprocessing/pbs` folder in this repository.
 
+## Running Tests on Gadi:
+
+Note that if you have a local version of Python3 installed in your environment, running `pytest` in the `tests` folder will likely fail, with `gdal` being reported as missing. In such cases, run `pytest` as follows:
+
+`python3 -m pytest`
+
+The above will run the system version of `pytest` and the tests should all runs to completion.
+
 ## User Parameters 
 
 `multiscale.py` takes the following input parameters:
