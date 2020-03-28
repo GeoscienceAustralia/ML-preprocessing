@@ -40,7 +40,7 @@ def test_multiscale(nx, ny):
     w = pywt.Wavelet('coif6')
     ml = int(np.min(np.array([pywt.dwt_max_level(int(nx), w.dec_len),
                               pywt.dwt_max_level(int(ny), w.dec_len)])))
-    print 'Testing Multiscale with nx:%d, ny:%d, max_level:%d'%(nx,ny,ml)
+    print ('Testing Multiscale with nx:%d, ny:%d, max_level:%d'%(nx,ny,ml))
     ms = Multiscale('/tmp/flist.txt', '/tmp', level=ml, file_extension='.tif',
                     mother_wavelet_name='coif6',
                     extension_mode='symmetric',
