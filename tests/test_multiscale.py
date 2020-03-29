@@ -24,7 +24,7 @@ def create_tif(npx, npy, fn):
     vals = np.float32(np.sin((x**2+y**2)*np.pi))
 
     # create 1-band raster file
-    dst_ds = gdal.GetDriverByName('GTiff').Create(fn, npx, npy, 1, gdal.GDT_Float32)
+    dst_ds = gdal.GetDriverByName('GTiff').Create(fn, int(npx), int(npy), 1, gdal.GDT_Float32)
     dst_ds.GetRasterBand(1).WriteArray(vals)
     dst_ds = None
 # end func
