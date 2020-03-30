@@ -49,10 +49,15 @@ def test_multiscale(nx, ny):
                     smoothing_iterations=10)
     ms.process()
 
-    os.system('rm -f %s' % fn)
-    os.system('rm -f /tmp/flist.txt')
+    # os.system() is an expensive call, replace it by os.remove 
+    #os.system('rm -f %s' % fn)
+    #os.system('rm -f /tmp/flist.txt')
+    os.remove(fn)
+    os.remove('/tmp/flist.txt')
 
     # cleanup output files produced
     for l in range(1,ml+1):
         fn = '/tmp/test.%d.%d.level_%03d.tif'%(nx,ny, l)
-        os.system('rm -f %s' % fn)
+        print("File to be removed ", fn)
+        # os.system('rm -f %s' % fn)
+        os.remove(fn)
