@@ -80,7 +80,7 @@ class Multiscale():
 
         :return: list of files
         """
-        files = None
+        files = []
         if(os.path.isdir(self._input)):
             log.info(' Searching for input files with extension %s in folder %s'%
                      (self._file_extension, self._input))
@@ -96,8 +96,13 @@ class Multiscale():
         elif(os.path.isfile(self._input)):
             try:
                 fh = open(self._input)
-                files = fh.read().splitlines()
+                files_raw = fh.read().splitlines()
                 fh.close()
+
+                # filter out commented files
+                for f in files_raw:
+                    if(f.strip()[0]!='#'): files.append(f)
+                # end for
             except:
                 raise RuntimeError('Failed to read input file')
         log.info(' Found %d files to process ' % len(files))
@@ -111,15 +116,13 @@ class Multiscale():
 
         if(self._chunk_index==0):
             files = self.__get_files()
-            count = 0
-            for iproc in np.arange(self._nproc):
-                for ifile in np.arange(np.divide(len(files), self._nproc)):
-                    self._proc_files[iproc].append(files[count])
-                    count += 1
-            # end for
-            for iproc in np.arange(np.mod(len(files), self._nproc)):
-                self._proc_files[iproc].append(files[count])
-                count += 1
+
+            def split_list(lst, npartitions):
+                k, m = divmod(len(lst), npartitions)
+                return [lst[i * k + min(i, m):(i + 1) * k + min(i + 1, m)] for i in range(npartitions)]
+            # end func
+            
+            self._proc_files = split_list(files, self._nproc)
         # end if
 
         # broadcast workload to all procs
@@ -297,7 +300,8 @@ CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
               help="Extrapolate raster if NO_DATA_VALUES are found. 'Ringing' artefacts can result near sharp contrasts"
                    " in image values -- especially at the edges of NO_DATA_VALUE regions. By extrapolating image values"
                    " to regions of NO_DATA_VALUE, 'ringing' artefacts can be pushed further outward, away from the region"
-                   " of interest in the original image. This parameter has no effect when the input raster has no masked"
+                   " of interest in the original image. Raster data are extrapolated by default and this parameter has no"
+                   " effect when the input raster has no masked"
                    " regions")
 @click.option('--max-search-dist', default=500,
               help="Maximum search distance (in pixels) for extrapolating image values to regions of NO_DATA_VALUE in "
