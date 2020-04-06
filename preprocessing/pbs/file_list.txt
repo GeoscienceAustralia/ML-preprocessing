@@ -1,0 +1,2 @@
+/g/data/ge3/covariates/national_albers_filled_new/albers_cropped/be-30y-85m-avg-BLUE.filled.lzw.nodata.tif
+/g/data/ge3/covariates/national_albers_filled_new/albers_cropped/be-30y-85m-avg-CLAY-BLUE+SWIR1.filled.lzw.nodata.tif
