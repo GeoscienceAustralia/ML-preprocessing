@@ -3,7 +3,7 @@
 
 ## Dependencies:
 
-Install the following module into user space (--user) after loading required modules (listed in the next section) on Gadi:
+Install the following modules into user space (--user) after loading required modules (listed in the next section) on Gadi:
 * `pywavelts, mpi4py, click`:
   
   `pip3.7 install --user pywavelets`
