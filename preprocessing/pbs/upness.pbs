@@ -1,0 +1,24 @@
+#!/bin/bash
+#PBS -P ge3
+#PBS -N upness
+#PBS -q hugemem
+#PBS -l walltime=24:00:00,mem=1470GB,ncpus=48,jobfs=256GB
+#PBS -l storage=scratch/rxh562+gdata/ge3
+#PBS -l wd
+#PBS -j oe
+#PBS -M rakib.hassan@ga.gov.au
+#PBS -m bae
+
+module purge
+module load pbs
+module load python3-as-python
+module load openmpi/2.1.6-mt
+module load hdf5/1.10.5p
+
+export PATH=$HOME/.local/bin:$PATH
+export LC_ALL=en_AU.UTF-8
+export LANG=en_AU.UTF-8
+export PYTHONPATH=/g/data/ge3/rakib/gadi:$PYTHONPATH
+
+python /path/to/ml-preprocessing/preprocessing/upness.py /g/data/ge3/rakib/gadi/multiscale/dem_fill.level_006_nodata_170_cubic.tif /g/data/ge3/rakib/gadi/upness_dem_fill.level_006_nodata_170_cubic.tif --nproc 48 > /g/data/ge3/rakib/gadi/out.txt
+
