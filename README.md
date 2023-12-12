@@ -18,7 +18,7 @@ export GDAL_DATA=/apps/gdal/3.0.2/share/gdal/
 export PYTHONPATH=/apps/gdal/3.0.2/lib64:/apps/gdal/3.0.2/lib64/python3.7/site-packages
 export LC_ALL=en_AU.UTF-8
 export LANG=en_AU.UTF-8
-export PYTHONPATH=/g/data/ge3/rakib/raijin/soft/ML-preprocessing:$PYTHONPATH
+export PYTHONPATH=/g/data/ge3/rakib/ML-preprocessing:$PYTHONPATH
 ```
 Amend the last line above to point to a local copy of ML-preprocessing.
 For `pbs` batch jobs, check example pbs scripts in the `preprocessing/pbs` folder in this repository.
