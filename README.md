@@ -9,7 +9,7 @@ Load modules and define paths (amend as required) as follows for interactive run
 module purge
 module load python3/3.7.4
 module load gdal/3.0.2
-module load openmpi/2.1.6-mt
+module load openmpi/4.1.4
 module load hdf5/1.10.5p
 
 source /g/data/ge3/ml_preproc_venv/bin/activate
@@ -20,6 +20,7 @@ export LC_ALL=en_AU.UTF-8
 export LANG=en_AU.UTF-8
 export PYTHONPATH=/g/data/ge3/rakib/ML-preprocessing:$PYTHONPATH
 ```
+
 Amend the last line above to point to a local copy of ML-preprocessing.
 For `pbs` batch jobs, check example pbs scripts in the `preprocessing/pbs` folder in this repository.
 

@@ -11,14 +11,16 @@
 module purge
 module load python3/3.7.4
 module load gdal/3.0.2
-module load openmpi/2.1.6-mt
+module load openmpi/4.1.4
 module load hdf5/1.10.5p
+
+source /g/data/ge3/ml_preproc_venv/bin/activate
+
 export GDAL_DATA=/apps/gdal/3.0.2/share/gdal/
 export PYTHONPATH=/apps/gdal/3.0.2/lib64:/apps/gdal/3.0.2/lib64/python3.7/site-packages
-export PATH=$HOME/.local/bin:$PATH
-export PYTHONPATH=/g/data/ge3/rakib/raijin/soft/geo-wavelets:$PYTHONPATH
 export LC_ALL=en_AU.UTF-8
 export LANG=en_AU.UTF-8
+export PYTHONPATH=/g/data/ge3/rakib/ML-preprocessing:$PYTHONPATH
 
 mpirun -np 32 --map-by ppr:16:node python3 /g/data/ge3/rakib/raijin/soft/geo-wavelets/preprocessing/multiscale.py file_list.txt /g/data/ge3/covariates/national/temp-multiscale 5 --max-search-dist 500 --keep-level 2 --keep-level 3 --keep-level 4 --keep-level 5 --log-level DEBUG 
 
