@@ -1,19 +1,6 @@
 # geo-wavelets
 2D Wavelet decomposition/reconstruction for raster data
 
-## Dependencies:
-
-Install the following modules into user space (--user) after loading required modules (listed in the next section) on Gadi:
-* `pywavelts, mpi4py, click`:
-  
-  `pip3.7 install --user pywavelets`
-  
-  `pip3.7 install --user mpi4py click `
-  
-
-There are no major additional dependencies other than the ones defined below, which are already available on
-Gadi.
-
 ## Running on Gadi:
 
 Load modules and define paths (amend as required) as follows for interactive runs:
@@ -24,14 +11,16 @@ module load python3/3.7.4
 module load gdal/3.0.2
 module load openmpi/2.1.6-mt
 module load hdf5/1.10.5p
+
+source /g/data/ge3/ml_preproc_venv/bin/activate
+
 export GDAL_DATA=/apps/gdal/3.0.2/share/gdal/
 export PYTHONPATH=/apps/gdal/3.0.2/lib64:/apps/gdal/3.0.2/lib64/python3.7/site-packages
-export PATH=$HOME/.local/bin:$PATH
-export PYTHONPATH=/g/data/ge3/rakib/raijin/soft/geo-wavelets:$PYTHONPATH
 export LC_ALL=en_AU.UTF-8
 export LANG=en_AU.UTF-8
+export PYTHONPATH=/g/data/ge3/rakib/raijin/soft/ML-preprocessing:$PYTHONPATH
 ```
-
+Amend the last line above to point to a local copy of ML-preprocessing.
 For `pbs` batch jobs, check example pbs scripts in the `preprocessing/pbs` folder in this repository.
 
 ## Running Tests on Gadi:
@@ -40,7 +29,7 @@ Note that if you have a local version of Python3 installed in your environment, 
 
 `python3 -m pytest`
 
-The above will run the system version of `pytest` and the tests should all runs to completion.
+The above will run the system version of `pytest` and the tests should all run to completion.
 
 ## User Parameters 
 
