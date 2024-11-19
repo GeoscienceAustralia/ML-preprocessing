@@ -1,9 +1,11 @@
 import pytest
 from preprocessing.multiscale import Multiscale
 import numpy as np
-import gdal
+from osgeo import gdal
 import os
 import pywt
+
+import tempfile
 
 @pytest.fixture(params=np.random.randint(100, 2000, 10))
 def nx(request):
@@ -30,10 +32,12 @@ def create_tif(npx, npy, fn):
 # end func
 
 def test_multiscale(nx, ny):
-    fn = '/tmp/test.%d.%d.tif'%(nx,ny)
+    path = tempfile.mkdtemp()
+    fn = os.path.join(path, 'test.%d.%d.tif'%(nx,ny))
     create_tif(nx, ny, fn)
-
-    flist = open('/tmp/flist.txt', 'w+')
+    
+    flist_fn = os.path.join(path, 'flist.txt')
+    flist = open(flist_fn, 'w+')
     flist.write(fn)
     flist.close()
 
@@ -41,7 +45,7 @@ def test_multiscale(nx, ny):
     ml = int(np.min(np.array([pywt.dwt_max_level(int(nx), w.dec_len),
                               pywt.dwt_max_level(int(ny), w.dec_len)])))
     print ('Testing Multiscale with nx:%d, ny:%d, max_level:%d'%(nx,ny,ml))
-    ms = Multiscale('/tmp/flist.txt', '/tmp', level=ml, file_extension='.tif',
+    ms = Multiscale(flist_fn, path, level=ml, file_extension='.tif',
                     mother_wavelet_name='coif6',
                     extension_mode='symmetric',
                     extrapolate=True,
@@ -53,11 +57,11 @@ def test_multiscale(nx, ny):
     #os.system('rm -f %s' % fn)
     #os.system('rm -f /tmp/flist.txt')
     os.remove(fn)
-    os.remove('/tmp/flist.txt')
+    os.remove(flist_fn)
 
     # cleanup output files produced
     for l in range(1,ml+1):
-        fn = '/tmp/test.%d.%d.level_%03d.tif'%(nx,ny, l)
+        fn = os.path.join(path, 'test.%d.%d.level_%03d.tif'%(nx,ny, l))
         print("File to be removed ", fn)
         # os.system('rm -f %s' % fn)
         os.remove(fn)
